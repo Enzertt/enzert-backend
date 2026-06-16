@@ -1,5 +1,28 @@
 import mongoose from "mongoose";
 
+const trackSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    duration: {
+      type: String,
+      default: "",
+    },
+
+    audioUrl: {
+      type: String,
+      default: "",
+    },
+  },
+  {
+    _id: true,
+  },
+);
+
 const albumSchema = new mongoose.Schema(
   {
     title: {
@@ -31,6 +54,11 @@ const albumSchema = new mongoose.Schema(
     featured: {
       type: Boolean,
       default: false,
+    },
+
+    tracks: {
+      type: [trackSchema],
+      default: [],
     },
   },
   {
