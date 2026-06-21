@@ -10,6 +10,7 @@ const trackSchema = new mongoose.Schema(
 
     duration: {
       type: String,
+      required: true,
       default: "",
     },
 
@@ -56,10 +57,7 @@ const albumSchema = new mongoose.Schema(
       default: false,
     },
 
-    tracks: {
-      type: [trackSchema],
-      default: [],
-    },
+    tracks: [trackSchema],
   },
   {
     timestamps: true,

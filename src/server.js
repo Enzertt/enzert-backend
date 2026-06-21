@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import albumRoutes from "./routes/albumRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 dotenv.config();
 
 connectDB();
@@ -15,6 +16,7 @@ app.use("/api/albums", albumRoutes);
 app.get("/", (req, res) => {
   res.send("Enzert API Running");
 });
+app.use("/api/upload", uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 

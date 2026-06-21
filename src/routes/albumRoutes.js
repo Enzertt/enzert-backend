@@ -1,6 +1,8 @@
 import express from "express";
 import Album from "../models/Album.js";
 
+import cloudinary from "../config/cloudinary.js";
+
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -27,6 +29,17 @@ router.get("/featured", async (req, res) => {
   }
 });
 
+router.get("/cloudinary-test", async (req, res) => {
+  try {
+    res.json({
+      status: "Cloudinary connected",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 router.get("/:id", async (req, res) => {
   try {
     const album = await Album.findById(req.params.id);
