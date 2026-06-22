@@ -43,4 +43,36 @@ router.post("/audio", upload.single("audio"), async (req, res) => {
   }
 });
 
+router.post("/image", upload.single("image"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        message: "No image file uploaded",
+      });
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "enzert/covers",
+          },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          },
+        )
+        .end(req.file.buffer);
+    });
+
+    res.json({
+      imageUrl: result.secure_url,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
 export default router;
