@@ -57,6 +57,12 @@ const albumSchema = new mongoose.Schema(
       default: false,
     },
 
+    playCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
     tracks: [trackSchema],
   },
   {
